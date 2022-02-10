@@ -2,7 +2,7 @@ project:
   version: @project.version@
 spring:
   profiles:
-    active: docker
+    active: local
 management:
   endpoints:
     web:

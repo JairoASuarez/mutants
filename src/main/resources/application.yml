@@ -1,0 +1,40 @@
+project:
+  version: @project.version@
+spring:
+  profiles:
+    active: docker
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+      health:
+        show-details: always
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+---
+spring:
+  profiles: local
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test
+server:
+  port: 8080
+  tomcat:
+    max-threads: 1000000
+---
+spring:
+  profiles: docker
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test
+server:
+  port: 8080
+  tomcat:
+    max-threads: 1000000

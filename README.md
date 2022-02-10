@@ -14,8 +14,8 @@ Es una API REST que permite:
 - [Endpoins](#endpoints)
   - [MutantsController](#mutantscontroller)
   - [StatsController](#statscontroller)
-- [Documentación](#documentacin)
-- [Monitorización](#monitorizacin)
+- [Documentacion](#documentacion)
+- [Monitorizacion](#monitorizacion)
 - [Pruebas](#pruebas)
   - [Cobertura](#cobertura)
 
@@ -113,11 +113,11 @@ Existen dos perfiles: **local** y **docker**.
     ```
   
 
-### Documentación
+### Documentacion
 - [Swagger](https://swagger.io/): La definición de swaager está en `/swagger-ui.html`, por ejemplo: `http://localhost:8080/swagger-ui.html`
 - [SpringDoc OpenAPI](https://springdoc.org/): Se encuentra en `/v3/api-docs`, por ejemplo: `http://localhost:8080/v3/api-docs`
 
-### Monitorización
+### Monitorizacion
 - [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html): Se puede ver el estado del API REST  de la siguiente forma: `/actuator`, 
 por ejemplo: `http://localhost:8080/actuator`. 
 

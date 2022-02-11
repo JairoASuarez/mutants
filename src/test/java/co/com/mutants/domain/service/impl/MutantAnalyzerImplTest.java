@@ -45,6 +45,13 @@ public class MutantAnalyzerImplTest {
     }
 
     @Test
+    public void shouldFindAMutantWithTwoSequencesInTheSameLine() throws MutantException {
+        String[] dna = new String[] { "AAAAAAAA", "CAGATGAC", "TTATGGAT", "AACGAGCA", "TCCCTAGC", "TCACTGAG", "ATGCATGC", "ATCTTGCA" };
+        MutantAnalyzer subject = factory.create(dna);
+        assertTrue(subject.isMutant());
+    }
+
+    @Test
     public void shouldFindAHumanWithShortSequence() throws MutantException {
         String[] dna = new String[] { "AA", "AA" };
         MutantAnalyzer subject = factory.create(dna);

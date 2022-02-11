@@ -2,7 +2,9 @@ package co.com.mutants.domain.service.impl;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,13 +18,13 @@ public class MutantAnalyzerImpl implements MutantAnalyzer {
 
     private final String[] dna;
     private final int dnaLength;
-    private int numberOfSequences;
+    private final AtomicInteger numberOfSequences;
 
     public MutantAnalyzerImpl(String[] dna) {
         super();
         this.dna = dna;
         this.dnaLength = dna.length;
-        this.numberOfSequences = 0;
+        this.numberOfSequences = new AtomicInteger(0);
     }
 
     @Override
@@ -49,11 +51,11 @@ public class MutantAnalyzerImpl implements MutantAnalyzer {
         checkHorizontalAndVerticalSequences(dna);
         checkMainDiagonalSequences(dna);
         checkAntiDiagonalSequences(dna);
-        return numberOfSequences > 1;
+        return numberOfSequences.get() > 1;
     }
 
     private void checkHorizontalAndVerticalSequences(String[] dna) {
-        for (int i = 0; i < dnaLength && numberOfSequences <= 1; i++) {
+        for (int i = 0; i < dnaLength && numberOfSequences.get() <= 1; i++) {
             checkSequence(dna[i]);
             StringBuilder column = new StringBuilder();
             for (String s : dna) {
@@ -64,7 +66,7 @@ public class MutantAnalyzerImpl implements MutantAnalyzer {
     }
 
     private void checkMainDiagonalSequences(String[] dna) {
-        for (int i = 0; i < dnaLength && numberOfSequences <= 1; i++) {
+        for (int i = 0; i < dnaLength && numberOfSequences.get() <= 1; i++) {
             int x = 0;
             StringBuilder diagonal = new StringBuilder();
             for (int j = i; j >= 0; j--) {
@@ -74,7 +76,7 @@ public class MutantAnalyzerImpl implements MutantAnalyzer {
             checkSequence(diagonal.toString());
         }
 
-        for (int i = 0; i < dnaLength && numberOfSequences <= 1; i++) {
+        for (int i = 0; i < dnaLength && numberOfSequences.get() <= 1; i++) {
             int x = dnaLength - 1;
             int y = dnaLength - i;
             StringBuilder diagonal = new StringBuilder();
@@ -89,7 +91,7 @@ public class MutantAnalyzerImpl implements MutantAnalyzer {
 
     private void checkAntiDiagonalSequences(String[] dna) {
         StringBuilder firstDiagonal = new StringBuilder();
-        for (int i = 0; i < dnaLength && numberOfSequences <= 1; i++) {
+        for (int i = 0; i < dnaLength && numberOfSequences.get() <= 1; i++) {
             int x = dnaLength - i;
             StringBuilder upperDiagonal = new StringBuilder();
             StringBuilder lowerDiagonal = new StringBuilder();
@@ -106,9 +108,7 @@ public class MutantAnalyzerImpl implements MutantAnalyzer {
     }
 
     private void checkSequence(String sequence) {
-        if (sequences.stream().anyMatch(sequence::contains)) {
-            numberOfSequences++;
-        }
+        sequences.forEach(x -> numberOfSequences.getAndAdd(StringUtils.countMatches(sequence, x)));
     }
 
 }

@@ -1,0 +1,38 @@
+project:
+  version: @project.version@
+spring:
+  profiles:
+    active: local
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+      health:
+        show-details: always
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+---
+spring:
+  profiles: local
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test
+server:
+  port: 8080
+  tomcat:
+    max-threads: 1000000
+---
+spring:
+  profiles: docker
+  data:
+    mongodb:
+      uri: mongodb+srv://jairosuarez:cNv6jUxxjhVbth90@cluster0.do6zk.mongodb.net/challengedb?retryWrites=true&w=majority
+server:
+  port: 8080
+  tomcat:
+    max-threads: 1000000

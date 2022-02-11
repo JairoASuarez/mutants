@@ -5,6 +5,9 @@ Es una API REST que permite:
 - Analizar la secuencia ADN de una persona y determina si es un humano o un mutante. 
 - Consultar las estadísticas de los análisis realizados.
 
+Se encuentra desplegada en el siguiente enlace: http://Mutantsapi-env-2.eba-x3tueu5r.us-east-1.elasticbeanstalk.com 
+usando AWS Elastic Beanstalk.
+
 ## Contenido
 
 - [Tecnologias](#tecnologias)
@@ -29,6 +32,7 @@ Es una API REST que permite:
 - [Log4J2](http://www.slf4j.org/)
 - [Docker](https://www.docker.com/)
 - [Jacoco](https://www.jacoco.org/jacoco/trunk/doc/)
+- [AWS Elastic beanstalk](https://aws.amazon.com/elasticbeanstalk/)
 
 ## Configuracion
 ### Pre-requisitos en Linux
@@ -53,14 +57,14 @@ Por defecto se ejecuta en: **localhost:8080** con perfil **local**
 Existen dos perfiles: **local** y **docker**.
 
 ### API URLs
-- Local: (http://localhost:8080)
-- Docker: (http://localhost:8080) 
+- Local (perfil local): (http://localhost:8080)
+- AWS (perfil docker): (Mutantsapi-env-2.eba-x3tueu5r.us-east-1.elasticbeanstalk.com) 
 
 ### Endpoints
 
 #### MutantsController: 
 - Ruta: /mutant
-- Peticion: POST http://localhost:8080/mutant
+- Peticion: POST http://Mutantsapi-env-2.eba-x3tueu5r.us-east-1.elasticbeanstalk.com/mutant
   - Request body para ADN mutante:
 
     ```
@@ -101,7 +105,7 @@ Existen dos perfiles: **local** y **docker**.
 
 #### StatsController:
 - Ruta: /stats
-- Peticion: GET http://localhost:8080/stats
+- Peticion: GET http://Mutantsapi-env-2.eba-x3tueu5r.us-east-1.elasticbeanstalk.com/stats
   - Response: 200 OK Content-Type : application/json;charset=UTF-8
 
     ```
